@@ -1,4 +1,4 @@
-# Akrivis DocsHub - Deploy Package
+# DocsHub - Deploy Package
 
 ระบบศูนย์รวมคู่มือองค์กร พร้อมหน้า Admin CMS สำหรับเพิ่ม/แก้ไข/ลบคู่มือ บันทึกข้อมูลด้วย Firebase Firestore
 
