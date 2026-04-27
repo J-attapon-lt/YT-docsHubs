@@ -1,4 +1,4 @@
-# DocsHub - Deploy Package
+# Akrivis DocsHub - Deploy Package
 
 ระบบศูนย์รวมคู่มือองค์กร พร้อมหน้า Admin CMS สำหรับเพิ่ม/แก้ไข/ลบคู่มือ บันทึกข้อมูลด้วย Firebase Firestore
 
@@ -129,3 +129,21 @@ users/{uid}
 - Public user อ่านคู่มือที่ Published ได้
 - Admin/Editor แก้ไขคู่มือได้
 - Admin ลบคู่มือได้
+
+## เปลี่ยนโลโก้บริษัท
+
+ระบบใส่โลโก้บริษัทไว้แล้วที่ไฟล์:
+
+```txt
+public/company-logo.svg
+```
+
+ถ้าต้องการใช้โลโก้จริง ให้เอาไฟล์โลโก้บริษัทมาแทนไฟล์นี้ได้เลย หรือวางเป็น `public/company-logo.png` แล้วแก้ `.env` เป็น:
+
+```env
+VITE_COMPANY_LOGO_URL=/company-logo.png
+VITE_COMPANY_NAME=Yang Yuen
+VITE_COMPANY_SUBTITLE=Technology
+```
+
+หลังแก้ `.env` หรือเปลี่ยนไฟล์โลโก้ ให้ build/deploy ใหม่บน Vercel อีกครั้ง
