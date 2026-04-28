@@ -207,7 +207,7 @@ const HomeView = ({ docs, userRole = 'viewer', onSelectDoc, onOpenAdmin }) => {
           </h1>
 
           <p className="text-lg md:text-xl text-blue-200 max-w-2xl mb-8">
-            ศูนย์รวมคู่มือการใช้งานและเอกสารอ้างอิงของระบบ (Central Knowledge Base)
+            ศูนย์รวมคู่มือการใช้งานและเอกสารอ้างอิงต่างๆ ( Central Knowledge Base )
           </p>
 
           <div className="w-full max-w-xl relative text-gray-900">
