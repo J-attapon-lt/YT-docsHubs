@@ -546,7 +546,7 @@ const ReaderView = ({ docData, onBack }) => {
                 <img
                   src={getImageUrl(currentContent.imageUrl)}
                   alt={currentContent.imageCaption || currentContent.title || 'ภาพประกอบ'}
-                  className="mx-auto max-h-[520px] w-full object-contain rounded-xl border bg-white"
+                  className="mx-auto max-h-[520px] w-full object-contain rounded-xl border-4 border-blue-600 bg-white p-2"
                   onError={(event) => {
                     event.currentTarget.style.display = 'none';
                   }}
