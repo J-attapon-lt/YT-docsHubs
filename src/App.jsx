@@ -275,7 +275,7 @@ const HomeView = ({ docs, userRole = 'viewer', onSelectDoc, onOpenAdmin }) => {
         <p>© {new Date().getFullYear()} Yang Yuen Technology Service and Supply Co., Ltd.</p>
         <p className="text-sm text-gray-500">© Design by Attapon J.</p>
         <p className="text-sm text-gray-500">
-          Tel 090 239 0786 | Email : attapon.j@ltrthailand.com
+          Email : attapon.j@ltrthailand.com
         </p>
       </footer>
     </div>
