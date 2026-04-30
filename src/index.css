@@ -32,6 +32,7 @@ body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMac
   margin-right: 0.35em;
   color: #2563eb;
 }
+
 .prose i.bi,
 .print-content i.bi {
   display: inline-block;
