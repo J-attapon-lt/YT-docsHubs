@@ -191,8 +191,9 @@ const getIcon = (iconName, className = 'w-8 h-8') => {
       return <BookOpen className={className} />;
   }
 };
+
+
 const iconSvgMap = {
-  home: '<svg xmlns="http://www.w3.org/2000/svg" class="inline-icon" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(49, 117, 249)" d="M240 6.1c9.1-8.2 22.9-8.2 32 0l232 208c9.9 8.8 10.7 24 1.8 33.9s-24 10.7-33.9 1.8l-8-7.2 0 205.3c0 35.3-28.7 64-64 64l-288 0c-35.3 0-64-28.7-64-64l0-205.3-8 7.2c-9.9 8.8-25 8-33.9-1.8s-8-25 1.8-33.9L240 6.1zm16 50.1L96 199.7 96 448c0 8.8 7.2 16 16 16l48 0 0-104c0-39.8 32.2-72 72-72l48 0c39.8 0 72 32.2 72 72l0 104 48 0c8.8 0 16-7.2 16-16l0-248.3-160-143.4zM208 464l96 0 0-104c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24l0 104z"/></svg>',
   BookOpen: '<svg xmlns="http://www.w3.org/2000/svg" class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>',
   FileText: '<svg xmlns="http://www.w3.org/2000/svg" class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>',
   ClipboardList: '<svg xmlns="http://www.w3.org/2000/svg" class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>',
@@ -217,7 +218,7 @@ const iconSvgMap = {
 
 const renderContentHtml = (html = '') => {
   const sanitized = DOMPurify.sanitize(html || '', {
-    ADD_TAGS: ['i','svg', 'path', 'circle', 'rect', 'ellipse'],
+    ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse'],
     ADD_ATTR: [
       'class',
       'viewBox',
@@ -642,7 +643,7 @@ const ReaderView = ({ docData, onBack }) => {
               className="prose prose-blue max-w-none text-base lg:text-lg text-gray-800 print-content space-y-4"
               dangerouslySetInnerHTML={{
                 __html: renderContentHtml(currentContent?.content || ''),
-              }}
+                }}
             />
 
             {currentContent?.imageUrl && (
@@ -1483,7 +1484,7 @@ const deleteImage = (sectionIndex, imageIndex) => {
                       <div
                         className="prose prose-blue max-w-none text-gray-800"
                         dangerouslySetInnerHTML={{
-                          __html: renderContentHtml(section.content || ''),
+                        __html: renderContentHtml(currentContent?.content || ''),
                         }}
                       />
                       {(section.images || []).length > 0 && (
