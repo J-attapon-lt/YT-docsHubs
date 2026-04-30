@@ -27,7 +27,12 @@ body {
   margin: 1.5rem 0 1rem;
   color: #111827;
 }
-
+li {
+  font:
+    1rem "Fira Sans",
+    sans-serif;
+  margin-bottom: 0.5rem;
+}
 .prose h2 {
   font-size: 1.6rem;
   font-weight: 800;
