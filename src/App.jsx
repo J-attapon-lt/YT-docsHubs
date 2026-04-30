@@ -218,7 +218,7 @@ const iconSvgMap = {
 
 const renderContentHtml = (html = '') => {
   const sanitized = DOMPurify.sanitize(html || '', {
-    ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse'],
+    ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse', 'i'],
     ADD_ATTR: [
       'class',
       'viewBox',
@@ -1484,7 +1484,7 @@ const deleteImage = (sectionIndex, imageIndex) => {
                       <div
                         className="prose prose-blue max-w-none text-gray-800"
                         dangerouslySetInnerHTML={{
-                        __html: renderContentHtml(currentContent?.content || ''),
+                          __html: renderContentHtml(section.content || ''),
                         }}
                       />
                       {(section.images || []).length > 0 && (
