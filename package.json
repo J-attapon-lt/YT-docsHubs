@@ -1,5 +1,5 @@
 {
-  "name": "yyt-docshub",
+  "name": "yt-docshub",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "dompurify": "latest",
-    "firebase": "latest",
-    "lucide-react": "latest",
-    "vite": "latest",
+    "bootstrap-icons": "^1.13.1",
+    "dompurify": "^3.4.1",
+    "firebase": "^12.12.1",
+    "lucide-react": "^1.11.0",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
     "autoprefixer": "latest",
