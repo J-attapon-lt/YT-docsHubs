@@ -217,7 +217,7 @@ const iconSvgMap = {
 
 const renderContentHtml = (html = '') => {
   const sanitized = DOMPurify.sanitize(html || '', {
-    ADD_TAGS: ['i','svg', 'path', 'circle', 'rect', 'ellipse'],
+    ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse', 'i', 'span'],
     ADD_ATTR: [
       'class',
       'viewBox',
@@ -242,6 +242,7 @@ const renderContentHtml = (html = '') => {
   return sanitized.replace(/\[icon:([A-Za-z0-9_-]+)\]/g, (match, iconName) => {
     return iconSvgMap[iconName] || iconSvgMap.BookOpen;
   });
+
 };
 // ==========================================
 // Helper: Document Visibility by Role
