@@ -98,10 +98,10 @@ body {
   line-height: 1.85;
 }
 
-/* ย่อหน้าในกล่องข้อความ ไม่ต้องเยื้อง */
+/* ย่อหน้าใน div ปกติ ให้ยังย่อหน้า */
 .prose div p,
 .print-content div p {
-  text-indent: 0;
+  text-indent: 2em;
 }
 
 .prose ul,
