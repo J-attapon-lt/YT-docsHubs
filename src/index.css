@@ -220,16 +220,10 @@ body {
 }
 
 .material-symbols-outlined {
-  display: inline-block;
-  vertical-align: -0.18em;
-  margin-right: 0.35em;
-  color: #2563eb;
-  font-size: 1.15em;
-  line-height: 1;
   font-family: 'Material Symbols Outlined' !important;
   font-weight: normal;
   font-style: normal;
-  font-size: 1.15em;
+  font-size: 1.2em;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -240,8 +234,15 @@ body {
   vertical-align: -0.18em;
   margin-right: 0.35em;
   -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
   font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  vertical-align: -0.18em;
+  margin-right: 0.35em;
+  color: #2563eb;
+  font-size: 1.15em;
+  line-height: 1;
+
 }
 
 .icon-orange {
