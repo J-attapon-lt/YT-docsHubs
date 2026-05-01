@@ -36,22 +36,6 @@ body {
   overflow-wrap: break-word;
   word-break: break-word;
 }
-/* Paragraph / ย่อหน้า */
-.prose p,
-.print-content p {
-  text-indent: 2em;
-  margin: 0.75rem 0;
-  line-height: 1.9;
-  text-align: justify;
-}
-
-/* ย่อหน้าในกล่องข้อความ ไม่ต้องเยื้อง */
-.prose div p,
-.print-content div p {
-  text-indent: 0;
-}
-
-
 
 .prose,
 .prose *,
@@ -93,6 +77,15 @@ body {
   color: #1e40af;
 }
 
+/* Paragraph / ย่อหน้า */
+.prose p,
+.print-content p {
+  text-indent: 2em;
+  margin: 0.75rem 0;
+  line-height: 1.9;
+  text-align: justify;
+}
+
 .prose p,
 .prose li,
 .prose td,
@@ -105,8 +98,10 @@ body {
   line-height: 1.85;
 }
 
-.prose p {
-  margin: 0.7rem 0;
+/* ย่อหน้าในกล่องข้อความ ไม่ต้องเยื้อง */
+.prose div p,
+.print-content div p {
+  text-indent: 0;
 }
 
 .prose ul,
@@ -261,13 +256,7 @@ body {
 /* ================================
    Responsive
 ================================ */
-/* มือถือไม่เยื้อง เพื่อไม่ให้บรรทัดแคบเกิน */
-@media (max-width: 768px) {
-  .prose p,
-  .print-content p {
-    text-indent: 0 !important;
-    text-align: left;
-  }
+
 @media (max-width: 768px) {
   .prose,
   .print-content {
@@ -279,6 +268,7 @@ body {
   .prose [style*='text-indent'],
   .print-content [style*='text-indent'] {
     text-indent: 0 !important;
+    text-align: left;
   }
 
   .prose ul,
