@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 @tailwind base;
 @tailwind components;
@@ -219,30 +220,26 @@ body {
   color: #2563eb;
 }
 
-.material-symbols-outlined {
+.material-symbols-outlined,
+.prose .material-symbols-outlined,
+.print-content .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1.2em;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  vertical-align: -0.18em;
-  margin-right: 0.35em;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  vertical-align: -0.18em;
-  margin-right: 0.35em;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 1.2em !important;
+  line-height: 1 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  word-wrap: normal !important;
+  direction: ltr !important;
+  vertical-align: -0.18em !important;
+  margin-right: 0.35em !important;
   color: #2563eb;
-  font-size: 1.15em;
-  line-height: 1;
-
+  -webkit-font-feature-settings: 'liga' !important;
+  font-feature-settings: 'liga' !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .icon-orange {
@@ -355,29 +352,4 @@ body {
     max-width: 100% !important;
     max-height: 700px;
   }
-   /* ================================
-   Fix Google Material Symbols
-   Must be placed at the bottom
-================================ */
-
-.prose .material-symbols-outlined,
-.print-content .material-symbols-outlined,
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined' !important;
-  font-weight: normal !important;
-  font-style: normal !important;
-  font-size: 1.2em !important;
-  line-height: 1 !important;
-  letter-spacing: normal !important;
-  text-transform: none !important;
-  display: inline-block !important;
-  white-space: nowrap !important;
-  word-wrap: normal !important;
-  direction: ltr !important;
-  vertical-align: -0.18em !important;
-  margin-right: 0.35em !important;
-  -webkit-font-feature-settings: 'liga' !important;
-  font-feature-settings: 'liga' !important;
-  -webkit-font-smoothing: antialiased !important;
-
 }
