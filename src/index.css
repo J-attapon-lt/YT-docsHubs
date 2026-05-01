@@ -36,6 +36,28 @@ body {
   overflow-wrap: break-word;
   word-break: break-word;
 }
+/* Paragraph / ย่อหน้า */
+.prose p,
+.print-content p {
+  text-indent: 2em;
+  margin: 0.75rem 0;
+  line-height: 1.9;
+  text-align: justify;
+}
+
+/* ย่อหน้าในกล่องข้อความ ไม่ต้องเยื้อง */
+.prose div p,
+.print-content div p {
+  text-indent: 0;
+}
+
+/* มือถือไม่เยื้อง เพื่อไม่ให้บรรทัดแคบเกิน */
+@media (max-width: 768px) {
+  .prose p,
+  .print-content p {
+    text-indent: 0 !important;
+    text-align: left;
+  }
 
 .prose,
 .prose *,
