@@ -4,86 +4,182 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================
+   Base Font / Layout
+================================ */
+
 html,
 body,
 #root {
   font-family: 'Sarabun', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   background: #f9fafb;
+  color: #1f2937;
+}
+
+/* ================================
+   Document Content
+================================ */
+
+.prose,
+.print-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .prose,
-.prose * {
+.prose *,
+.print-content,
+.print-content * {
   font-family: 'Sarabun', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  box-sizing: border-box;
 }
 
 .prose h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.25;
   font-weight: 800;
   margin: 1.5rem 0 1rem;
   color: #111827;
 }
-li {
-  font:
-    1rem "Fira Sans",
-    sans-serif;
-  margin-bottom: 0.5rem;
-}
+
 .prose h2 {
-  font-size: 1.6rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.3;
   font-weight: 800;
   margin: 1.4rem 0 0.8rem;
   color: #1e3a8a;
 }
 
 .prose h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  line-height: 1.35;
   font-weight: 800;
   margin: 1.2rem 0 0.6rem;
   color: #1e3a8a;
 }
 
+.prose h4 {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.45;
+  font-weight: 800;
+  margin: 1rem 0 0.5rem;
+  color: #1e40af;
+}
+
+.prose p,
+.prose li,
+.prose td,
+.prose th,
+.print-content p,
+.print-content li,
+.print-content td,
+.print-content th {
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.85;
+}
+
 .prose p {
   margin: 0.7rem 0;
-  line-height: 1.8;
 }
 
 .prose ul,
 .prose ol {
   margin: 0.7rem 0 0.7rem 1.5rem;
+  padding-left: 1.25rem;
 }
 
 .prose li {
   margin: 0.35rem 0;
 }
 
-.prose table {
+.prose div,
+.print-content div {
+  max-width: 100%;
+}
+
+.prose img,
+.print-content img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.prose figure,
+.print-content figure {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose figcaption,
+.print-content figcaption {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ================================
+   Tables
+================================ */
+
+.prose table,
+.print-content table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
 }
 
 .prose th,
-.prose td {
+.prose td,
+.print-content th,
+.print-content td {
   border: 1px solid #d1d5db;
   padding: 0.65rem;
+  white-space: normal;
+  vertical-align: top;
 }
 
-.prose th {
+.prose th,
+.print-content th {
   background: #eff6ff;
   color: #1e3a8a;
+  font-weight: 800;
+  text-align: center;
 }
 
-.prose code {
+.prose td,
+.print-content td {
+  color: #1f2937;
+}
+
+/* ================================
+   Inline Code
+================================ */
+
+.prose code,
+.print-content code {
   background: #f3f4f6;
   border-radius: 0.35rem;
   padding: 0.1rem 0.35rem;
   color: #111827;
+  font-family: 'Sarabun', system-ui, sans-serif !important;
 }
+
+/* ================================
+   Utilities
+================================ */
 
 .line-clamp-1 {
   display: -webkit-box;
@@ -98,6 +194,10 @@ li {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ================================
+   Icons
+================================ */
 
 .inline-icon {
   width: 1.15em;
@@ -117,6 +217,22 @@ li {
   line-height: 1;
 }
 
+.icon-orange {
+  color: #f97316 !important;
+}
+
+.icon-blue {
+  color: #2563eb !important;
+}
+
+.icon-green {
+  color: #16a34a !important;
+}
+
+.icon-red {
+  color: #dc2626 !important;
+}
+
 .prose i.bi,
 .print-content i.bi {
   display: inline-block;
@@ -126,15 +242,57 @@ li {
   vertical-align: -0.08em;
 }
 
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 768px) {
+  .prose,
+  .print-content {
+    font-size: 15px;
+  }
+
+  .prose p,
+  .print-content p,
+  .prose [style*='text-indent'],
+  .print-content [style*='text-indent'] {
+    text-indent: 0 !important;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-left: 0;
+    padding-left: 1.25rem;
+  }
+
+  .prose table,
+  .print-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .prose th,
+  .prose td,
+  .print-content th,
+  .print-content td {
+    min-width: 140px;
+  }
+
+  .prose figure,
+  .print-content figure {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* ================================
+   Print
+================================ */
+
 @media print {
   .no-print {
     display: none !important;
-  }
-
-  .print-content {
-    color: #000 !important;
-    font-size: 12pt;
-    font-family: 'Sarabun', system-ui, sans-serif !important;
   }
 
   body {
@@ -145,5 +303,27 @@ li {
     padding: 0 !important;
     margin: 0 !important;
     width: 100% !important;
+  }
+
+  .print-content {
+    color: #000 !important;
+    font-size: 12pt;
+    font-family: 'Sarabun', system-ui, sans-serif !important;
+  }
+
+  .print-content table {
+    display: table;
+    width: 100%;
+    page-break-inside: auto;
+  }
+
+  .print-content tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .print-content img {
+    max-width: 100% !important;
+    max-height: 700px;
   }
 }
