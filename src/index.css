@@ -51,13 +51,7 @@ body {
   text-indent: 0;
 }
 
-/* มือถือไม่เยื้อง เพื่อไม่ให้บรรทัดแคบเกิน */
-@media (max-width: 768px) {
-  .prose p,
-  .print-content p {
-    text-indent: 0 !important;
-    text-align: left;
-  }
+
 
 .prose,
 .prose *,
@@ -267,7 +261,13 @@ body {
 /* ================================
    Responsive
 ================================ */
-
+/* มือถือไม่เยื้อง เพื่อไม่ให้บรรทัดแคบเกิน */
+@media (max-width: 768px) {
+  .prose p,
+  .print-content p {
+    text-indent: 0 !important;
+    text-align: left;
+  }
 @media (max-width: 768px) {
   .prose,
   .print-content {
