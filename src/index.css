@@ -313,43 +313,195 @@ body {
 }
 
 /* ================================
-   Print
+   Print Full Page
 ================================ */
 
 @media print {
-  .no-print {
-    display: none !important;
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
   }
 
   body {
-    background: white;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .print-area {
-    padding: 0 !important;
-    margin: 0 !important;
+  .no-print,
+  .print-hide,
+  nav,
+  aside,
+  header,
+  footer,
+  button,
+  .sidebar,
+  .toolbar {
+    display: none !important;
+  }
+
+  .print-area,
+  .print-content,
+  .prose {
     width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  .print-content,
+  .print-content *,
+  .prose,
+  .prose * {
+    box-sizing: border-box !important;
+    font-family: 'Sarabun', system-ui, sans-serif !important;
   }
 
   .print-content {
     color: #000 !important;
-    font-size: 12pt;
-    font-family: 'Sarabun', system-ui, sans-serif !important;
+    font-size: 12pt !important;
+    line-height: 1.65 !important;
   }
 
-  .print-content table {
-    display: table;
-    width: 100%;
+  .print-content h1,
+  .print-content h2,
+  .print-content h3,
+  .print-content h4,
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    color: #000 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .print-content h1,
+  .prose h1 {
+    font-size: 18pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .print-content h2,
+  .prose h2 {
+    font-size: 16pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .print-content h3,
+  .prose h3 {
+    font-size: 14pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .print-content h4,
+  .prose h4 {
+    font-size: 13pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .print-content p,
+  .print-content li,
+  .prose p,
+  .prose li {
+    font-size: 12pt !important;
+    line-height: 1.65 !important;
+  }
+
+  .print-content p,
+  .prose p {
+    text-indent: 2em !important;
+    text-align: justify !important;
+    margin: 0.45rem 0 !important;
+  }
+
+  .print-content ul,
+  .print-content ol,
+  .prose ul,
+  .prose ol {
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .print-content table,
+  .prose table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
     page-break-inside: auto;
+    break-inside: auto;
   }
 
-  .print-content tr {
+  .print-content tr,
+  .prose tr {
     page-break-inside: avoid;
+    break-inside: avoid;
     page-break-after: auto;
   }
 
-  .print-content img {
+  .print-content th,
+  .print-content td,
+  .prose th,
+  .prose td {
+    font-size: 10.5pt !important;
+    line-height: 1.45 !important;
+    padding: 5px !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+
+  .print-content th,
+  .prose th {
+    background: #f1f5f9 !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+  }
+
+  .print-content figure,
+  .prose figure {
     max-width: 100% !important;
-    max-height: 700px;
+    margin: 10px 0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    overflow: visible !important;
+  }
+
+  .print-content figcaption,
+  .prose figcaption {
+    color: #333 !important;
+    font-size: 10.5pt !important;
+    margin-top: 4px !important;
+  }
+
+  .print-content img,
+  .prose img {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 245mm !important;
+    object-fit: contain !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
   }
 }
