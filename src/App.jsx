@@ -220,6 +220,8 @@ const renderContentHtml = (html = '') => {
     ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse', 'i', 'span'],
     ADD_ATTR: [
       'class',
+      'span',
+      'class',
       'viewBox',
       'fill',
       'stroke',
