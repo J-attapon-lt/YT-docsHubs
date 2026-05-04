@@ -217,11 +217,68 @@ const iconSvgMap = {
 
 const renderContentHtml = (html = '') => {
   const sanitized = DOMPurify.sanitize(html || '', {
-    ADD_TAGS: ['svg', 'path', 'circle', 'rect', 'ellipse', 'i', 'span'],
+    ADD_TAGS: [
+      'iframe',
+      'video',
+      'source',
+      'svg',
+      'path',
+      'circle',
+      'rect',
+      'ellipse',
+      'i',
+      'span',
+      'figure',
+      'figcaption',
+      'div',
+      'p',
+      'a',
+      'img',
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'ol',
+      'ul',
+      'li',
+      'strong',
+      'em',
+      'code',
+      'table',
+      'thead',
+      'tbody',
+      'tr',
+      'th',
+      'td',
+      'br',
+      'hr',
+    ],
     ADD_ATTR: [
       'class',
-      'span',
-      'class',
+      'style',
+      'id',
+      'href',
+      'target',
+      'rel',
+      'alt',
+
+      // iframe / video / image
+      'src',
+      'title',
+      'allow',
+      'allowfullscreen',
+      'frameborder',
+      'scrolling',
+      'width',
+      'height',
+      'controls',
+      'preload',
+      'type',
+      'poster',
+
+      // svg
       'viewBox',
       'fill',
       'stroke',
@@ -235,8 +292,6 @@ const renderContentHtml = (html = '') => {
       'x',
       'y',
       'rx',
-      'width',
-      'height',
       'xmlns',
     ],
   });
@@ -392,15 +447,28 @@ const HomeView = ({ docs, userRole = 'viewer', onSelectDoc, onOpenAdmin }) => {
 // Reader View
 // ==========================================
 const ReaderView = ({ docData, onBack }) => {
-  const [activeSection, setActiveSection] = useState(docData.sections?.[0]?.id || null);
+  const [activeSection, setActiveSection] = useState(
+    docData.sections?.[0]?.id || null
+  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sectionSearch, setSectionSearch] = useState('');
+
+  const currentContent = useMemo(() => {
+    return (
+      (docData.sections || []).find((item) => item.id === activeSection) ||
+      docData.sections?.[0] ||
+      null
+    );
+  }, [docData.sections, activeSection]);
+
+  const cleanHtml = useMemo(() => {
+    return renderContentHtml(currentContent?.content || '');
+  }, [currentContent]);
 
   const filteredSections = useMemo(
     () =>
       (docData.sections || []).filter((item) =>
-        item.title?.toLowerCase().includes(sectionSearch.toLowerCase()) ||
-        item.content?.toLowerCase().includes(sectionSearch.toLowerCase())
+        item.title?.toLowerCase().includes(sectionSearch.toLowerCase())
       ),
     [docData.sections, sectionSearch]
   );
