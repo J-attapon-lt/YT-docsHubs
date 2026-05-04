@@ -452,18 +452,7 @@ const ReaderView = ({ docData, onBack }) => {
   );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sectionSearch, setSectionSearch] = useState('');
-const currentContent = useMemo(() => {
-  return (
-    (docData.sections || []).find((item) => item.id === activeSection) ||
-    docData.sections?.[0] ||
-    null
-  );
-}, [docData.sections, activeSection]);
 
-const cleanHtml = useMemo(() => {
-  return renderContentHtml(currentContent?.content || '');
-}, [currentContent]);
-  
   
   const filteredSections = useMemo(
     () =>
