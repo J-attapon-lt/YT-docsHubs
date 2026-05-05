@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
-
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 @tailwind base;
 @tailwind components;
@@ -82,6 +79,7 @@ body {
 }
 
 /* Paragraph / ย่อหน้า */
+
 .prose p,
 .print-content p {
   text-indent: 2em;
@@ -102,7 +100,6 @@ body {
   line-height: 1.85;
 }
 
-/* ย่อหน้าใน div ปกติ ให้ยังย่อหน้า */
 .prose div p,
 .print-content div p {
   text-indent: 2em;
@@ -221,6 +218,7 @@ body {
   vertical-align: -0.18em;
   margin-right: 0.35em;
   color: #2563eb;
+  flex-shrink: 0;
 }
 
 .material-symbols-outlined,
@@ -235,13 +233,16 @@ body {
   text-transform: none !important;
   display: inline-block !important;
   white-space: nowrap !important;
+  word-wrap: normal !important;
   direction: ltr !important;
   vertical-align: -0.18em !important;
   margin-right: 0.35em !important;
   -webkit-font-feature-settings: 'liga' !important;
   font-feature-settings: 'liga' !important;
   -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
 }
+
 .icon-orange {
   color: #f97316 !important;
 }
@@ -265,6 +266,36 @@ body {
   color: #2563eb;
   font-size: 1.05em;
   vertical-align: -0.08em;
+}
+
+/* ================================
+   Video / Iframe
+================================ */
+
+.prose iframe,
+.print-content iframe {
+  max-width: 100%;
+  border: 0;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border: 4px solid #2563eb;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 /* ================================
@@ -309,6 +340,11 @@ body {
   .print-content figure {
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+  .video-frame {
+    border-width: 3px;
+    border-radius: 12px;
   }
 }
 
@@ -498,6 +534,11 @@ body {
     object-fit: contain !important;
     page-break-inside: avoid;
     break-inside: avoid;
+  }
+
+  .video-frame,
+  iframe {
+    display: none !important;
   }
 
   a {
