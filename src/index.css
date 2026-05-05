@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 @tailwind base;
@@ -233,16 +235,13 @@ body {
   text-transform: none !important;
   display: inline-block !important;
   white-space: nowrap !important;
-  word-wrap: normal !important;
   direction: ltr !important;
   vertical-align: -0.18em !important;
   margin-right: 0.35em !important;
-  color: #2563eb;
   -webkit-font-feature-settings: 'liga' !important;
   font-feature-settings: 'liga' !important;
   -webkit-font-smoothing: antialiased !important;
 }
-
 .icon-orange {
   color: #f97316 !important;
 }
