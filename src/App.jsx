@@ -368,7 +368,7 @@ const HomeView = ({ docs, userRole = 'viewer', onSelectDoc, onOpenAdmin }) => {
           </h1>
 
           <p className="text-lg md:text-xl text-blue-200 max-w-2xl mb-8">
-            ศูนย์รวมคู่มือการใช้งานและเอกสารอ้างอิงของระบบ (Central Knowledge Base)
+            ศูนย์บูรณาการข้อมูลการปฏิบัติงาน ( Integrated Operations Data Center )
           </p>
 
           <div className="w-full max-w-xl relative text-gray-900">
@@ -436,7 +436,7 @@ const HomeView = ({ docs, userRole = 'viewer', onSelectDoc, onOpenAdmin }) => {
         <p>© {new Date().getFullYear()} Yang Yuen Technology Service and Supply Co., Ltd.</p>
         <p className="text-sm text-gray-500">© Design by Attapon J.</p>
         <p className="text-sm text-gray-500">
-          Tel 090 239 0786 | Email : attapon.j@ltrthailand.com
+          Email : attapon.j@ltrthailand.com
         </p>
       </footer>
     </div>
