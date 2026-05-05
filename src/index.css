@@ -303,23 +303,27 @@ body {
 ================================ */
 
 
-@media (max-width: 768px) {
-   .prose,
+
+    @media (max-width: 768px) {
+  .prose,
   .print-content {
     font-size: 15px;
+  }
+
   .prose figure > div,
   .print-content figure > div {
     min-height: 260px !important;
     padding: 8px !important;
-     
   }
-     
-   .prose p,
-  .print-content p,
+
+  .prose p,
+  .print-content p {
+    text-indent: 0 !important;
+    text-align: left;
+  }
+
   .prose figure img,
-  .print-content figure img
-   .prose [style*='text-indent'],
-  .print-content [style*='text-indent'] {
+  .print-content figure img {
     max-width: 100% !important;
     max-height: 360px !important;
     width: auto !important;
@@ -327,9 +331,12 @@ body {
     object-fit: contain !important;
     margin: auto !important;
     display: block !important;
-     text-indent: 0 !important;
-    text-align: left;
+  }
 
+  .prose [style*='text-indent'],
+  .print-content [style*='text-indent'] {
+    text-indent: 0 !important;
+    text-align: left;
   }
 
   .prose ul,
@@ -362,8 +369,7 @@ body {
     border-width: 3px;
     border-radius: 12px;
   }
-}
-
+    }
 /* ================================
    Print Full Page
 ================================ */
