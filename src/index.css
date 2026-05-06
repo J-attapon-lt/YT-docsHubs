@@ -29,7 +29,24 @@ body {
 /* ================================
    Document Content
 ================================ */
+.prose ol,
+.print-content ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  padding-left: 2rem !important;
+}
 
+.prose ul,
+.print-content ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  padding-left: 2rem !important;
+}
+
+.prose li,
+.print-content li {
+  display: list-item !important;
+}
 .prose,
 .print-content {
   width: 100%;
