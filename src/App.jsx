@@ -778,17 +778,21 @@ const ReaderView = ({ docData, onBack }) => {
                       )}
                     </div>
 
-                    <div className="flex-1 text-right">
-                      {next ? (
-                        <button
-                          onClick={() => handleSelectSection(next.id)}
-                          className="text-right text-gray-500 hover:text-blue-700 p-4 ml-auto"
-                        >
-                          <span className="text-xs font-bold uppercase mb-1 block">
-                            บทถัดไป »
-                          </span>
-                          <span className="font-medium text-lg">{next.title}</span>
-                        </button>
+                    <button
+  onClick={() => {
+    onSelectDoc(nextDoc);
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }, 50);
+  }}
+>
+  บทถัดไป »
+</button>
                       ) : (
                         <button
                           onClick={onBack}
