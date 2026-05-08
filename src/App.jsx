@@ -798,34 +798,28 @@ const ReaderView = ({ docData, onBack }) => {
   {next ? (
     <button
       onClick={() => handleSelectSection(next.id)}
-      className="text-right text-gray-500 hover:text-blue-700 p-4 ml-auto"
+      className="text-right text-gray-500 hover:text-blue-700 p-4 ml-auto flex flex-col items-end"
     >
       <span className="text-xs font-bold uppercase mb-1 block">
         บทถัดไป »
       </span>
       <span className="font-medium text-lg">{next.title}</span>
     </button>
-  ) : null}
+  ) : (
+    <button
+      onClick={onBack}
+      className="text-right text-gray-500 hover:text-green-700 p-4 ml-auto flex flex-col items-end"
+    >
+      <span className="text-xs font-bold uppercase mb-1">
+        จบเนื้อหา
+      </span>
+      <span className="font-medium text-lg flex items-center gap-2 text-green-700">
+        กลับสู่หน้าหลัก
+        <CheckCircle2 className="w-5 h-5" />
+      </span>
+    </button>
+  )}
 </div>
-                      ) : (
-                        <button
-                          onClick={onBack}
-                          className="text-right text-gray-500 hover:text-green-700 p-4 ml-auto flex flex-col items-end"
-                        >
-                          <span className="text-xs font-bold uppercase mb-1">
-                            จบเนื้อหา
-                          </span>
-                          <span className="font-medium text-lg flex items-center gap-2 text-green-700">
-                            กลับสู่หน้าหลัก
-                            <CheckCircle2 className="w-5 h-5" />
-                          </span>
-                        </button>
-                      )}
-                    </div>
-                  </>
-                );
-              })()}
-            </div>
           </div>
         </div>
       </div>
