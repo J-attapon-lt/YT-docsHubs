@@ -806,58 +806,90 @@ const ReaderView = ({ docData, onBack }) => {
         ? docData.sections[index + 1]
         : null;
 
-    return (
-      <>
-        <div className="flex-1">
-          {prev ? (
-            <button
-              onClick={() => handleSelectSection(prev.id)}
-              className="text-left text-gray-500 hover:text-blue-700 p-4"
-            >
-              <span className="text-xs font-bold uppercase mb-1 block">
-                « บทก่อนหน้า
-              </span>
-              <span className="font-medium text-lg">{prev.title}</span>
-            </button>
-          ) : null}
-        </div>
+{(currentContent?.images || []).length > 0 && (
+              <div className="mt-8 space-y-8">
+                {currentContent.images.map((image, imageIndex) => (
+                  image?.url ? (
+                    <figure
+                      key={`${image.url}-${imageIndex}`}
+                      className="rounded-2xl border bg-gray-50 p-4 shadow-sm"
+                    >
+                      <img
+                        src={getImageUrl(image.url)}
+                        alt={image.caption || `ภาพที่ ${imageIndex + 1}`}
+                        className="mx-auto max-h-[520px] w-full object-contain rounded-xl border bg-white"
+                        onError={(event) => {
+                          event.currentTarget.style.display = 'none';
+                        }}
+                      />
 
-        <div className="flex-1 text-right">
-          {next ? (
-            <button
-              onClick={() => handleSelectSection(next.id)}
-              className="text-right text-gray-500 hover:text-blue-700 p-4 ml-auto flex flex-col items-end"
-            >
-              <span className="text-xs font-bold uppercase mb-1 block">
-                บทถัดไป »
-              </span>
-              <span className="font-medium text-lg">{next.title}</span>
-            </button>
-          ) : (
-            <button
-              onClick={onBack}
-              className="text-right text-gray-500 hover:text-green-700 p-4 ml-auto flex flex-col items-end"
-            >
-              <span className="text-xs font-bold uppercase mb-1">
-                จบเนื้อหา
-              </span>
-              <span className="font-medium text-lg flex items-center gap-2 text-green-700">
-                กลับสู่หน้าหลัก
-                <CheckCircle2 className="w-5 h-5" />
-              </span>
-            </button>
-          )}
-        </div>
-      </>
-    );
-  })()}
-</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+                      <figcaption className="mt-3 text-center text-sm text-gray-500">
+                        {image.caption || `ภาพที่ ${imageIndex + 1}`}
+                      </figcaption>
+                    </figure>
+                  ) : null
+                ))}
+              </div>
+            )}
+
+            <div className="mt-20 pt-8 border-t flex justify-between items-center no-print bg-white">
+              {(() => {
+                const index = docData.sections.findIndex(
+                  (item) => item.id === activeSection
+                );
+
+                const prev = index > 0 ? docData.sections[index - 1] : null;
+                const next =
+                  index < docData.sections.length - 1
+                    ? docData.sections[index + 1]
+                    : null;
+
+                return (
+                  <>
+                    <div className="flex-1">
+                      {prev ? (
+                        <button
+                          onClick={() => handleSelectSection(prev.id)}
+                          className="text-left text-gray-500 hover:text-blue-700 p-4"
+                        >
+                          <span className="text-xs font-bold uppercase mb-1 block">
+                            « บทก่อนหน้า
+                          </span>
+                          <span className="font-medium text-lg">{prev.title}</span>
+                        </button>
+                      ) : null}
+                    </div>
+
+                    <div className="flex-1 text-right">
+                      {next ? (
+                        <button
+                          onClick={() => handleSelectSection(next.id)}
+                          className="text-right text-gray-500 hover:text-blue-700 p-4 ml-auto flex flex-col items-end"
+                        >
+                          <span className="text-xs font-bold uppercase mb-1 block">
+                            บทถัดไป »
+                          </span>
+                          <span className="font-medium text-lg">{next.title}</span>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={onBack}
+                          className="text-right text-gray-500 hover:text-green-700 p-4 ml-auto flex flex-col items-end"
+                        >
+                          <span className="text-xs font-bold uppercase mb-1">
+                            จบเนื้อหา
+                          </span>
+                          <span className="font-medium text-lg flex items-center gap-2 text-green-700">
+                            กลับสู่หน้าหลัก
+                            <CheckCircle2 className="w-5 h-5" />
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
 
 // ==========================================
 // Admin Login
