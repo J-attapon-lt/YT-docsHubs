@@ -453,7 +453,11 @@ const ReaderView = ({ docData, onBack }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sectionSearch, setSectionSearch] = useState('');
 
-  
+  useEffect(() => {
+    setActiveSection(docData.sections?.[0]?.id || null);
+    setSectionSearch('');
+  }, [docData]);
+
   const filteredSections = useMemo(
     () =>
       (docData.sections || []).filter((item) =>
@@ -466,28 +470,43 @@ const ReaderView = ({ docData, onBack }) => {
     (docData.sections || []).find((item) => item.id === activeSection) ||
     docData.sections?.[0];
 
+  const scrollReaderToTop = () => {
+    setTimeout(() => {
+      const scrollArea = document.querySelector('.reader-content-scroll');
+
+      if (scrollArea) {
+        scrollArea.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+    }, 50);
+  };
+
   const handleSelectSection = (id) => {
-  setActiveSection(id);
-  setIsSidebarOpen(false);
+    setActiveSection(id);
+    setIsSidebarOpen(false);
+    scrollReaderToTop();
+  };
 
-  setTimeout(() => {
-    const scrollArea = document.querySelector('.reader-content-scroll');
+  const handleBack = () => {
+    onBack();
 
-    if (scrollArea) {
-      scrollArea.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    } else {
+    setTimeout(() => {
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: 'smooth',
       });
-    }
-  }, 50);
-};
+    }, 50);
+  };
 
   const printAllSections = () => {
     const printWindow = window.open('', '_blank');
@@ -499,22 +518,33 @@ const ReaderView = ({ docData, onBack }) => {
 
     const allContent = (docData.sections || [])
       .map((section) => {
-        const printableImages = Array.isArray(section.images) && section.images.length > 0
-          ? section.images
-          : section.imageUrl
-            ? [{ url: section.imageUrl, caption: section.imageCaption || section.title }]
-            : [];
+        const printableImages =
+          Array.isArray(section.images) && section.images.length > 0
+            ? section.images
+            : section.imageUrl
+              ? [
+                  {
+                    url: section.imageUrl,
+                    caption: section.imageCaption || section.title,
+                  },
+                ]
+              : [];
 
         const imageHtml = printableImages
           .filter((image) => image?.url)
-          .map((image, imageIndex) => `
-            <figure style="margin-top:24px;text-align:center;">
-              <img src="${getImageUrl(image.url)}" style="max-width:100%;max-height:560px;object-fit:contain;border:1px solid #ddd;border-radius:12px;" />
-              <figcaption style="font-size:13px;color:#666;margin-top:8px;">
-                ${image.caption || `ภาพที่ ${imageIndex + 1}`}
-              </figcaption>
-            </figure>
-          `)
+          .map(
+            (image, imageIndex) => `
+              <figure style="margin-top:24px;text-align:center;">
+                <img
+                  src="${getImageUrl(image.url)}"
+                  style="max-width:100%;max-height:560px;object-fit:contain;border:1px solid #ddd;border-radius:12px;"
+                />
+                <figcaption style="font-size:13px;color:#666;margin-top:8px;">
+                  ${image.caption || `ภาพที่ ${imageIndex + 1}`}
+                </figcaption>
+              </figure>
+            `
+          )
           .join('');
 
         return `
@@ -534,27 +564,42 @@ const ReaderView = ({ docData, onBack }) => {
           <title>${docData.title}</title>
           <meta charset="UTF-8"/>
           <style>
+            @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+
             body {
-              font-family: Arial, Tahoma, sans-serif;
+              font-family: 'Sarabun', Arial, Tahoma, sans-serif;
               padding: 40px;
               color: #111827;
               line-height: 1.7;
             }
+
             h1 {
               color: #1e3a8a;
               border-bottom: 2px solid #dbeafe;
               padding-bottom: 10px;
             }
+
             table {
               width: 100%;
               border-collapse: collapse;
             }
-            table, th, td {
+
+            table,
+            th,
+            td {
               border: 1px solid #d1d5db;
             }
-            th, td {
+
+            th,
+            td {
               padding: 8px;
             }
+
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+
             @media print {
               body {
                 padding: 0;
@@ -562,11 +607,13 @@ const ReaderView = ({ docData, onBack }) => {
             }
           </style>
         </head>
+
         <body>
           <h1>${docData.title}</h1>
           <p>${docData.description || ''}</p>
           <hr/>
           ${allContent}
+
           <script>
             window.onload = function() {
               window.print();
@@ -585,7 +632,11 @@ const ReaderView = ({ docData, onBack }) => {
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           ยังไม่มีเนื้อหาในคู่มือนี้
         </h2>
-        <button onClick={onBack} className="bg-blue-600 text-white px-6 py-2 rounded-lg">
+
+        <button
+          onClick={handleBack}
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg"
+        >
           กลับหน้าหลัก
         </button>
       </div>
@@ -612,7 +663,7 @@ const ReaderView = ({ docData, onBack }) => {
 
         <div className="p-3 border-b bg-gray-50">
           <button
-            onClick={onBack}
+            onClick={handleBack}
             className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-700 transition-colors w-full px-3 py-2 rounded-lg hover:bg-white shadow-sm border border-gray-200"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -629,10 +680,12 @@ const ReaderView = ({ docData, onBack }) => {
             <h1 className="text-lg font-bold tracking-tight line-clamp-2 leading-tight">
               {docData.title}
             </h1>
+
             <p className="text-[10px] opacity-80 mt-1 uppercase tracking-wider font-semibold">
               Table of Contents
             </p>
           </div>
+
           <button className="lg:hidden" onClick={() => setIsSidebarOpen(false)}>
             <X className="w-6 h-6 text-white" />
           </button>
@@ -642,9 +695,10 @@ const ReaderView = ({ docData, onBack }) => {
           <div className="px-3 mb-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+
               <input
                 value={sectionSearch}
-                onChange={(e) => setSectionSearch(e.target.value)}
+                onChange={(event) => setSectionSearch(event.target.value)}
                 placeholder="ค้นหาในคู่มือ..."
                 className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
@@ -662,9 +716,16 @@ const ReaderView = ({ docData, onBack }) => {
                       : 'text-gray-600 hover:bg-gray-100 border-l-4 border-transparent'
                   }`}
                 >
-                  <span className={activeSection === item.id ? 'text-blue-600' : 'text-gray-400'}>
+                  <span
+                    className={
+                      activeSection === item.id
+                        ? 'text-blue-600'
+                        : 'text-gray-400'
+                    }
+                  >
                     <BookOpen className="w-4 h-4" />
                   </span>
+
                   <span className="text-sm leading-5">{item.title}</span>
                 </button>
               </li>
@@ -682,6 +743,7 @@ const ReaderView = ({ docData, onBack }) => {
             >
               <Menu className="w-6 h-6" />
             </button>
+
             <h1 className="font-bold text-gray-800 line-clamp-1 text-sm">
               {docData.title}
             </h1>
@@ -706,7 +768,7 @@ const ReaderView = ({ docData, onBack }) => {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 md:p-12 print-area">
+        <div className="reader-content-scroll flex-1 overflow-y-auto p-6 md:p-12 print-area">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
               <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 pb-4 border-b-2 border-blue-100 mt-4 leading-tight">
@@ -718,14 +780,18 @@ const ReaderView = ({ docData, onBack }) => {
               className="prose prose-blue max-w-none text-base lg:text-lg text-gray-800 print-content space-y-4"
               dangerouslySetInnerHTML={{
                 __html: renderContentHtml(currentContent?.content || ''),
-                }}
+              }}
             />
 
             {currentContent?.imageUrl && (
               <figure className="mt-8 rounded-2xl border bg-gray-50 p-4 shadow-sm">
                 <img
                   src={getImageUrl(currentContent.imageUrl)}
-                  alt={currentContent.imageCaption || currentContent.title || 'ภาพประกอบ'}
+                  alt={
+                    currentContent.imageCaption ||
+                    currentContent.title ||
+                    'ภาพประกอบ'
+                  }
                   className="mx-auto max-h-[520px] w-full object-contain rounded-xl border bg-white"
                   onError={(event) => {
                     event.currentTarget.style.display = 'none';
@@ -740,10 +806,9 @@ const ReaderView = ({ docData, onBack }) => {
               </figure>
             )}
 
-
             {(currentContent?.images || []).length > 0 && (
               <div className="mt-8 space-y-8">
-                {currentContent.images.map((image, imageIndex) => (
+                {currentContent.images.map((image, imageIndex) =>
                   image?.url ? (
                     <figure
                       key={`${image.url}-${imageIndex}`}
@@ -763,72 +828,7 @@ const ReaderView = ({ docData, onBack }) => {
                       </figcaption>
                     </figure>
                   ) : null
-                ))}
-              </div>
-            )}
-
-            <div className="mt-20 pt-8 border-t flex justify-between items-center no-print bg-white">
-              {(() => {
-                const index = docData.sections.findIndex(
-                  (item) => item.id === activeSection
-                );
-
-                const prev = index > 0 ? docData.sections[index - 1] : null;
-                const next =
-                  index < docData.sections.length - 1
-                    ? docData.sections[index + 1]
-                    : null;
-
-                return (
-                  <>
-                    <div className="flex-1">
-                      {prev && (
-                        <button
-                          onClick={() => handleSelectSection(prev.id)}
-                          className="text-left text-gray-500 hover:text-blue-700 p-4"
-                        >
-                          <span className="text-xs font-bold uppercase mb-1 block">
-                            « บทก่อนหน้า
-                          </span>
-                          <span className="font-medium text-lg">{prev.title}</span>
-                        </button>
-                      )}
-                    </div>
-<div className="mt-20 pt-8 border-t flex justify-between items-center no-print bg-white">
-  {(() => {
-    const index = docData.sections.findIndex(
-      (item) => item.id === activeSection
-    );
-
-    const prev = index > 0 ? docData.sections[index - 1] : null;
-    const next =
-      index < docData.sections.length - 1
-        ? docData.sections[index + 1]
-        : null;
-
-{(currentContent?.images || []).length > 0 && (
-              <div className="mt-8 space-y-8">
-                {currentContent.images.map((image, imageIndex) => (
-                  image?.url ? (
-                    <figure
-                      key={`${image.url}-${imageIndex}`}
-                      className="rounded-2xl border bg-gray-50 p-4 shadow-sm"
-                    >
-                      <img
-                        src={getImageUrl(image.url)}
-                        alt={image.caption || `ภาพที่ ${imageIndex + 1}`}
-                        className="mx-auto max-h-[520px] w-full object-contain rounded-xl border bg-white"
-                        onError={(event) => {
-                          event.currentTarget.style.display = 'none';
-                        }}
-                      />
-
-                      <figcaption className="mt-3 text-center text-sm text-gray-500">
-                        {image.caption || `ภาพที่ ${imageIndex + 1}`}
-                      </figcaption>
-                    </figure>
-                  ) : null
-                ))}
+                )}
               </div>
             )}
 
@@ -855,7 +855,10 @@ const ReaderView = ({ docData, onBack }) => {
                           <span className="text-xs font-bold uppercase mb-1 block">
                             « บทก่อนหน้า
                           </span>
-                          <span className="font-medium text-lg">{prev.title}</span>
+
+                          <span className="font-medium text-lg">
+                            {prev.title}
+                          </span>
                         </button>
                       ) : null}
                     </div>
@@ -869,16 +872,20 @@ const ReaderView = ({ docData, onBack }) => {
                           <span className="text-xs font-bold uppercase mb-1 block">
                             บทถัดไป »
                           </span>
-                          <span className="font-medium text-lg">{next.title}</span>
+
+                          <span className="font-medium text-lg">
+                            {next.title}
+                          </span>
                         </button>
                       ) : (
                         <button
-                          onClick={onBack}
+                          onClick={handleBack}
                           className="text-right text-gray-500 hover:text-green-700 p-4 ml-auto flex flex-col items-end"
                         >
                           <span className="text-xs font-bold uppercase mb-1">
                             จบเนื้อหา
                           </span>
+
                           <span className="font-medium text-lg flex items-center gap-2 text-green-700">
                             กลับสู่หน้าหลัก
                             <CheckCircle2 className="w-5 h-5" />
@@ -890,7 +897,16 @@ const ReaderView = ({ docData, onBack }) => {
                 );
               })()}
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+            
+                          
 
+                    
 // ==========================================
 // Admin Login
 // ==========================================
