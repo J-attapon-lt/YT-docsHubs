@@ -467,10 +467,27 @@ const ReaderView = ({ docData, onBack }) => {
     docData.sections?.[0];
 
   const handleSelectSection = (id) => {
-    setActiveSection(id);
-    setIsSidebarOpen(false);
-    window.scrollTo(0, 0);
-  };
+  setActiveSection(id);
+  setIsSidebarOpen(false);
+
+  setTimeout(() => {
+    const scrollArea = document.querySelector('.reader-content-scroll');
+
+    if (scrollArea) {
+      scrollArea.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, 50);
+};
 
   const printAllSections = () => {
     const printWindow = window.open('', '_blank');
@@ -777,7 +794,7 @@ const ReaderView = ({ docData, onBack }) => {
                         </button>
                       )}
                     </div>
-
+<div className="reader-content-scroll flex-1 overflow-y-auto p-6 md:p-12 print-area">
                     <button
   onClick={() => {
     onSelectDoc(nextDoc);
